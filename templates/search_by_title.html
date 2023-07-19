@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+{% block title %} Search By Title {% endblock %}
+
+{% block content %}
+
+    <div class="card">
+        {% for task in tasks %}
+            <h2>{{ task.title }}</h2><br>
+            <p>{{ task.body }}</p><br>
+            <small>{{ task.due_date }}</small><br>
+            <h4>task.category</h4><hr/>
+        {% endfor %}
+    </div>
+
+{% endblock %}
