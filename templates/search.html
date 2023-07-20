@@ -8,8 +8,9 @@
   <label for="id1">Search By Title:</label><br>
   <input type="text" id="id1" name="search_by_title"><br>
   <input type="submit"  value="Search">
-</form><br>
-<form action="" method="post" novalidate>
+    </form>
+<form action="" method="post" novalidate><br>
+
     {% csrf_token %}
   <label for="id2">Search By Tag:</label><br>
   <input type="text" id="id2" name="search_by_tag"><br>

@@ -1,5 +1,8 @@
 from django.db import models
+from datetime import datetime, time
 
+def end_of_date():
+    return datetime.combine(datetime.now(), time.max)
 
 class Category(models.Model):
     category_name = models.CharField(max_length=200)
@@ -16,7 +19,7 @@ class Tag(models.Model):
 class Task(models.Model):
     title = models.CharField(max_length=200)
     body = models.TextField()
-    due_date = models.DateTimeField()
+    due_date = models.DateTimeField(default=end_of_date)
     status = models.IntegerField()
     category = models.ForeignKey(Category, on_delete = models.CASCADE)
     tags = models.ManyToManyField(Tag)

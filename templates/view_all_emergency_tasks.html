@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{% block title %} View All Tasks {% endblock %}
+
+{% block content %}
+
+    <div >
+        {% for task in tasks %}
+        {% if task.status == 3  %}
+        <h3>{{task.title}}</h3>
+        {% endif %}
+        {% endfor %}
+    </div>
+
+{% endblock %}

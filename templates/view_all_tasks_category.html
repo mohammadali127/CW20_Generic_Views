@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+
+{% block title %} View All Category{% endblock %}
+
+{% block content %}
+
+    <div >
+        {% for cat in cats %}
+            <h3 >{{ cat.category_name }}</h3><br/>
+        {% for task in tasks %}
+        {% if cat.category_name == task.category.category_name %}
+        <h4 >{{ task.title }}</h4><br/>
+        {% endif %}
+        {% endfor %}
+        <hr>
+        {% endfor %}
+    </div>
+
+<form action="{% url 'add_category' %}" method="post" novalidate><br>
+    {% csrf_token %}
+  <label for="id">Add A Category:</label><br>
+  <input type="text" id="id" name="add_a_category"><br>
+  <input type="submit"  value="Add">
+</form>
+
+
+{% endblock %}

@@ -1,6 +1,22 @@
 from django.shortcuts import render, redirect
 from .models import Task, Tag, Category
 from django.contrib import messages
+from datetime import datetime, time
+
+def view_all_tasks_by_category(request):
+    cats = Category.objects.all()
+    tasks = Task.objects.all()
+    return render(request, 'view_all_tasks_category.html', {'cats': cats, 'tasks':tasks})
+
+def add_category(request):
+    if request.method == 'POST':
+        Category.objects.create(category_name=request.POST['add_a_category'])
+        messages.success(request, 'tag was added', 'success')
+    return render(request, 'base.html')
+
+def view_all_emergency_tasks(request):
+    tasks = Task.objects.all()
+    return render(request, 'view_all_emergency_tasks.html', {'tasks': tasks})
 
 def view_all_tasks(request):
     tasks = Task.objects.all()
