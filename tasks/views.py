@@ -23,7 +23,8 @@ def view_all_emergency_tasks(request):
 
 def view_all_tasks(request):
     tasks = Task.objects.all()
-    return render(request, 'view_all_tasks.html', {'tasks':tasks})
+    categories = Category.objects.all()
+    return render(request, 'view_all_tasks.html', {'tasks':tasks, 'categories':categories})
 
 def view_individual_task(request, task_id):
     task = Task.objects.get(id=task_id)

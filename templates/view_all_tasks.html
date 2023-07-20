@@ -17,6 +17,12 @@
   <input type="text" id="id1" name="body"><br>
     <label for="id3">Due Date:</label>
   <input type="date" id="id3" name="due_date"><br>
+    <label for="id6">Category:</label>
+  <select id="id6" name="category">
+      {% for category in categories %}
+      <option value={{category}}>{{category}}</option>
+      {% endfor %}
+      </select><br>
 <label for="id4">Status:</label>
   <select id="id4" name="status">
     <option value=1>Done</option>
