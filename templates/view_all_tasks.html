@@ -9,5 +9,26 @@
             <a class="card-body" href="{% url 'view_individual_task' task.id %}">{{ task.title }}</a><br/>
         {% endfor %}
     </div>
-
+<form action="{% url 'view_all_tasks' %}" method="post" novalidate><br>
+    {% csrf_token %}
+  <label for="id">Title:</label><br>
+  <input type="text" id="id" name="title"><br>
+    <label for="id1">Body:</label><br>
+  <input type="text" id="id1" name="body"><br>
+    <label for="id3">Due Date:</label>
+  <input type="date" id="id3" name="due_date"><br>
+<label for="id4">Status:</label>
+  <select id="id4" name="status">
+    <option value=1>Done</option>
+    <option value=2>Doing</option>
+    <option value=3>Undone</option>
+  </select><br>
+    <label for="id5">Status:</label>
+  <select id="id5" name="tag" multiple>
+    <option value='Backend'>Backend</option>
+    <option value='Frontend'>Frontend</option>
+    <option value='Full Stack'>Full Stack</option>
+  </select><br>
+  <input type="submit"  value="Create">
+</form>
 {% endblock %}

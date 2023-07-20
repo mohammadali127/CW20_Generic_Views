@@ -4,6 +4,9 @@ from django.contrib import messages
 from datetime import datetime, time
 
 def view_all_tasks_by_category(request):
+    if request.method == 'POST':
+        Task.objects.create(category_name=request.POST['add_a_category'])
+        messages.success(request, 'tag was added', 'success')
     cats = Category.objects.all()
     tasks = Task.objects.all()
     return render(request, 'view_all_tasks_category.html', {'cats': cats, 'tasks':tasks})

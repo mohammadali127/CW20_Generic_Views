@@ -18,8 +18,24 @@
 
 <form action="{% url 'add_category' %}" method="post" novalidate><br>
     {% csrf_token %}
-  <label for="id">Add A Category:</label><br>
-  <input type="text" id="id" name="add_a_category"><br>
+  <label for="id">Title:</label><br>
+  <input type="text" id="id" name="title"><br>
+    <label for="id1">Body:</label><br>
+  <input type="text" id="id1" name="body"><br>
+    <label for="id3">Due Date:</label>
+  <input type="date" id="id3" name="due_date">
+<label for="id4">Status:</label>
+  <select id="id4" name="status">
+    <option value=1>Done</option>
+    <option value=2>Doing</option>
+    <option value=3>Undone</option>
+  </select>
+    <label for="id5">Status:</label>
+  <select id="id5" name="tag" multiple>
+    <option value='Backend'>Backend</option>
+    <option value='Frontend'>Frontend</option>
+    <option value='Full Stack'>Full Stack</option>
+  </select>
   <input type="submit"  value="Add">
 </form>
 
