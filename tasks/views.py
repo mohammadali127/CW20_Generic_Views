@@ -33,15 +33,21 @@ class ViewAllEmergencyTasks(ListView):
     template_name = 'view_all_emergency_tasks.html'
     context_object_name = 'tasks'
 
-def view_all_tasks(request):
-    if request.method == 'POST':
-        Task.objects.create(title=request.POST['title'], body=request.POST['body'],
-                            due_date=request.POST['due_date'], status=request.POST['status'],
-                            category=Category.objects.get(pk=int(request.POST['category'])))
+
+class TaskListView(ListView):
+    model = Task
+    template_name = 'view_all_tasks.html'
+    context_object_name = 'tasks'
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['categories'] = Category.objects.all()
+        return context
+    def post(self, request, *args, **kwargs):
+        Task.objects.create( title=request.POST['title'],
+                             body=request.POST['body'], due_date=request.POST['due_date'],
+                             status=request.POST['status'], category=Category.objects.get(pk=int(request.POST['category'])))
         messages.success(request, 'new task was added', 'success')
-    tasks = Task.objects.all()
-    categories = Category.objects.all()
-    return render(request, 'view_all_tasks.html', {'tasks':tasks, 'categories':categories})
+        return self.get(request, *args, **kwargs)
 
 def view_individual_task(request, task_id):
     task = Task.objects.get(id=task_id)
