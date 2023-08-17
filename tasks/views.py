@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect
 from .models import Task, Tag, Category
 from django.contrib import messages
 from datetime import datetime, time
+from django.views.generic import ListView
 
 def view_all_tasks_by_category(request):
     if request.method == 'POST':
@@ -10,6 +11,19 @@ def view_all_tasks_by_category(request):
     cats = Category.objects.all()
     tasks = Task.objects.all()
     return render(request, 'view_all_tasks_category.html', {'cats': cats, 'tasks':tasks})
+
+class TaskListView(ListView):
+    model = Task
+    template_name = 'view_all_tasks_category.html'
+    context_object_name = 'tasks'
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['cats'] = Category.objects.all()
+        return context
+    def post(self, request, *args, **kwargs):
+        Task.objects.create(category_name=request.POST['add_a_category'])
+        messages.success(request, 'tag was added', 'success')
+        return self.get(request, *args, **kwargs)
 
 def add_category(request):
     if request.method == 'POST':
