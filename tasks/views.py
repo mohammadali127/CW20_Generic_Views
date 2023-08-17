@@ -18,11 +18,6 @@ class TaskListView(ListView):
         messages.success(request, 'tag was added', 'success')
         return self.get(request, *args, **kwargs)
 
-def add_category(request):
-    if request.method == 'POST':
-        Category.objects.create(category_name=request.POST['add_a_category'])
-        messages.success(request, 'tag was added', 'success')
-    return render(request, 'base.html')
 
 class AddCategoryView(CreateView):
     model = Category
@@ -32,9 +27,11 @@ class AddCategoryView(CreateView):
         messages.success(self.request, 'tag was added', 'success')
         return super().form_valid(form)
 
-def view_all_emergency_tasks(request):
-    tasks = Task.objects.all()
-    return render(request, 'view_all_emergency_tasks.html', {'tasks': tasks})
+
+class ViewAllEmergencyTasks(ListView):
+    model = Task
+    template_name = 'view_all_emergency_tasks.html'
+    context_object_name = 'tasks'
 
 def view_all_tasks(request):
     if request.method == 'POST':
