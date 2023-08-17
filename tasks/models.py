@@ -22,7 +22,7 @@ class Task(models.Model):
     due_date = models.DateTimeField(default=end_of_date)
     status = models.IntegerField()
     category = models.ForeignKey(Category, on_delete = models.CASCADE)
-    tags = models.ManyToManyField(Tag)
+    tags = models.ManyToManyField(Tag, blank=True, null=True)
 
     def __str__(self):
         return f'{self.title} + {self.due_date} + {self.category} + {self.tags}'

@@ -23,11 +23,9 @@ def view_all_emergency_tasks(request):
 
 def view_all_tasks(request):
     if request.method == 'POST':
-        #cat = Category.objects.get(category_name=request.POST['category'])[0]
-        #tag = Tag.objects.get(tag_name=request.POST['tag'])
         Task.objects.create(title=request.POST['title'], body=request.POST['body'],
                             due_date=request.POST['due_date'], status=request.POST['status'],
-                            category=request.POST['category'], tags=request.POST['tag'])
+                            category=Category.objects.get(pk=int(request.POST['category'])))
         messages.success(request, 'new task was added', 'success')
     tasks = Task.objects.all()
     categories = Category.objects.all()
